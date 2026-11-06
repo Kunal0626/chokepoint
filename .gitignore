@@ -1,4 +1,19 @@
+# Python
 __pycache__/
 *.pyc
 .venv/
+
+# Test / build artefacts
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Scratch output. Generated reports that are meant to be committed live in
+# examples/output/ and are added explicitly, so a blanket *.png rule would be
+# wrong here.
+/out/
+/tmp/
+
+# macOS
 .DS_Store

@@ -1,0 +1,33 @@
+# Minimal packaging, added in Phase 1 rather than Phase 9 on purpose: with a
+# src/ layout there is no import path to the package until it is installed, and
+# `pip install -e .` is a cleaner answer than sys.path manipulation in tests.
+# Phase 9 fills in the console script, classifiers and clean-clone docs.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chokepoint"
+version = "0.1.0"
+description = "Attack-path and patch-priority analyzer for network graphs"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Kunal Singh" }]
+
+# No runtime dependencies. The algorithms this project is about are written by
+# hand against the standard library; matplotlib is pulled in only by the
+# optional "viz" extra, and networkx only by "dev", where it acts as an
+# independent oracle in the test suite.
+dependencies = []
+
+[project.optional-dependencies]
+viz = ["matplotlib>=3.7"]
+dev = ["pytest>=7.4", "networkx>=3.0", "matplotlib>=3.7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
